@@ -1,5 +1,5 @@
 export interface Language {
-    name: string;
-    extension: string;
+    name: LanguageName;
+    extension: LanguageExt;
     script: string;
 }

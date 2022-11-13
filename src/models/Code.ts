@@ -5,4 +5,5 @@ export interface Code {
     baseCode: string;
     code: string;
     customInputs: string;
+    args: string
 }
