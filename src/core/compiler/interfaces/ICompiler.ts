@@ -1,3 +1,3 @@
 export interface ICompiler {
-    execute(code: string, args: unknown[]): string;
+    execute(code: string, args: unknown[]): Promise<string>;
 }
