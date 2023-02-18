@@ -1,0 +1,3 @@
+namespace kod {
+    void helloWorld();
+}
