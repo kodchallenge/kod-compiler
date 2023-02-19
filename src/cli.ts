@@ -33,9 +33,13 @@ const run = async () => {
             throw new Error("Language is required");
         }
     
-        compile(language, solutionPath).then(output => process.stdout.write(output))
+        compile(language, solutionPath).then(out => {
+            process.stdout.write(out);
+        }).catch(err => {
+            process.stderr.write(err);
+        });
     } catch(err: any) {
-        process.stderr.write(err);
+        process.stderr.write(err.message);
     }
 }
 
