@@ -8,9 +8,6 @@ export class CppCompiler implements ICompiler {
             const mainFile = `${solutionPath}\\main.cpp`;
             const command = `g++ ${mainFile} ${solutionFile} -o ${solutionPath}\\solution && ${solutionPath}\\solution`;
             exec(command, (err, stdout, stderr) => {
-                if (err) {
-                    return reject(err);
-                }
                 if (stderr) {
                     return reject(stderr);
                 }

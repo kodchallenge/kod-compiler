@@ -3,9 +3,6 @@
 // kcompiler --path=/usr/kc/problems/hello-world/solutions/usr-id/c
 
 import { compile } from "./core/compiler";
-import { CCompiler } from "./core/compiler/languages/c";
-
-console.log("Welcome to the CLI");
 
 const args = process.argv.slice(2);
 
@@ -24,14 +21,22 @@ const getOption = (optionName: string | string[]) => {
     return undefined;
 }
 
-const solutionPath = getOption(["--path", "--p"]);
-const language = getOption(["--language", "--l"]);
-
-if(!solutionPath) {
-    throw new Error("Solution path is required");
+const run = async () => {
+    try {
+        const solutionPath = getOption(["--path", "--p"]);
+        const language = getOption(["--language", "--l"]);
+    
+        if (!solutionPath) {
+            throw new Error("Solution path is required");
+        }
+        if (!language) {
+            throw new Error("Language is required");
+        }
+    
+        compile(language, solutionPath).then(output => process.stdout.write(output))
+    } catch(err: any) {
+        process.stderr.write(err);
+    }
 }
-if(!language) {
-    throw new Error("Language is required");
-}
 
-compile(language, solutionPath).then(console.log).catch(console.error);
+run();
