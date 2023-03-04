@@ -27,10 +27,10 @@ export const compile = (language: string, solutionPath: string): Promise<string>
                 const output = execSync(`docker exec -i ${container} sh -c "cd /app && ${command}"`).toString().trim();
                 resolve(output);
             } catch (err) {
-                exec(`docker stop ${container} && docker rm ${container}`);
+                //exec(`docker stop ${container} && docker rm ${container}`);
                 throw err;
             }
-            exec(`docker stop ${container} && docker rm ${container}`);
+            //exec(`docker stop ${container} && docker rm ${container}`);
         } catch (err: any) {
             reject(err?.message ?? "Kodunuzu çalıştıramadık :(");
         }
