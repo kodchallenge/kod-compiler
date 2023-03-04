@@ -26,7 +26,8 @@ export const compile = (language: string, solutionPath: string): Promise<string>
             const output = execSync(`docker exec -i ${container} sh -c "cd /app && ${command}"`).toString().trim();
             resolve(output);
         } catch (err: any) {
-            reject(err?.message ?? "Kodunuzu çalıştıramadık :(");
+            const msg = err?.message?.split("Command failed:")[1]?.trim();
+            reject(msg ?? "Kodunuzu çalıştıramadık :(");
         }
     });
     //const compiler = getCompiler(language)
