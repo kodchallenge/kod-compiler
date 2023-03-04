@@ -7,8 +7,8 @@ export class JavaScriptCompiler implements ICompiler {
         return new Promise((resolve, reject) => {
             execSync(`docker run -t -d nodeapp`);
             const container = execSync("docker ps -l -q").toString().trim();
-            execSync(`docker cp ${solutionPath} ${container}:/app`);
-            const output = execSync(`docker exec ${container} /app/solution/main.js`).toString().trim();
+            execSync(`docker cp ${solutionPath}/. ${container}:/app/solution`);
+            const output = execSync(`docker exec -it ${container} sh -c "/app/solution/main.js`).toString().trim();
             execSync(`docker stop ${container}`);
             execSync(`docker rm ${container}`);
             resolve(output);
