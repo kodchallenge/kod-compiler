@@ -9,8 +9,8 @@ export const compile = (language: string, solutionPath: string): Promise<string>
         js: "node main.js",
         ts: "ts-node main.ts",
         py: "python main.py",
-        c: "gcc main.c solution.c -o solution && solution",
-        cpp: "g++ main.cpp solution.cpp -o solution && solution",
+        c: "gcc main.c solution.c -o solution && ./solution",
+        cpp: "g++ main.cpp solution.cpp -o solution && ./solution",
     }
 
     return new Promise((resolve, reject) => {
