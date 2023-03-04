@@ -11,14 +11,14 @@ export class JavaScriptCompiler implements ICompiler {
                 const container = execSync("docker ps -l -q").toString().trim();
                 execSync(`docker cp ${solutionPath}/. ${container}:/app`);
                 try {
-                    const output = execSync(`docker exec -it ${container} sh -c "node /app/main.js"`).toString().trim();
+                    const output = execSync(`docker exec -i ${container} sh -c "node /app/main.js"`).toString().trim();
                     resolve(output);
                 } catch(err) {
                     exec(`docker stop ${container} && docker rm ${container}`);
                     throw err;
                 }
             } catch(err: any) {
-                reject(err);
+                reject(err?.message ?? "Kodunuz çalıştırılamadı.");
             }
         });
     }
