@@ -18,3 +18,6 @@
 
 `Container dan ana makinaya kopyalama`
     docker cp container_id:/foo.txt foo.txt
+
+`Remove all  container`
+    docker stop $(docker ps -aq)
