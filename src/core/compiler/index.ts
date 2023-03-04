@@ -23,14 +23,8 @@ export const compile = (language: string, solutionPath: string): Promise<string>
             execSync(`docker run -t -d ${language}_app`);
             const container = execSync("docker ps -l -q").toString().trim();
             execSync(`docker cp ${solutionPath}/. ${container}:/app`);
-            try {
-                const output = execSync(`docker exec -i ${container} sh -c "cd /app && ${command}"`).toString().trim();
-                resolve(output);
-            } catch (err) {
-                //exec(`docker stop ${container} && docker rm ${container}`);
-                throw err;
-            }
-            //exec(`docker stop ${container} && docker rm ${container}`);
+            const output = execSync(`docker exec -i ${container} sh -c "cd /app && ${command}"`).toString().trim();
+            resolve(output);
         } catch (err: any) {
             reject(err?.message ?? "Kodunuzu çalıştıramadık :(");
         }
