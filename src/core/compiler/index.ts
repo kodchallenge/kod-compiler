@@ -15,7 +15,7 @@ export const compile = (language: string, solutionPath: string): Promise<string>
 
     return new Promise((resolve, reject) => {
         const command = commands[language];
-        if(command) {
+        if(!command) {
             return reject("Bu dili desteklemiyoruz :(")
         }
         try {
